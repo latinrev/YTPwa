@@ -3,11 +3,13 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-		<!--		<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />-->
+		<meta name="description" content="A simple youtube video downloader app" />
+		<title>YTPWA</title>
+		<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="css/normalize.css" />
 		<link rel="stylesheet" href="css/skeleton.css" />
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="manifest" href="./manifest.json" />
 	</head>
 	<body style="padding: 50px">
 		<div>
@@ -21,6 +23,15 @@
 				const status = document.querySelector(".status");
 				window.location.href = `/download?link=${data}`;
 			};
+
+			// CODELAB: Register service worker.
+			if ("serviceWorker" in navigator) {
+				window.addEventListener("load", () => {
+					navigator.serviceWorker.register("./service-worker.js").then((reg) => {
+						console.log("Service worker registered.", reg);
+					});
+				});
+			}
 		</script>
 	</body>
 </html>
