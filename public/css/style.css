@@ -1,22 +1,25 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-
-div{
-    text-align: center;
-
+div {
+	text-align: center;
 }
-input{
-    width: 50%;
-    display: block;
-    margin: 0 auto;
-
+input {
+	width: 50%;
+	display: block;
+	margin: 0 auto;
 }
-button{
-    display: block;
-    margin: 10px auto;
+button {
+	display: block;
+	margin: 10px auto;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }

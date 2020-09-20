@@ -16,13 +16,19 @@
 			<h1>Descarga videos de youtube</h1>
 			<h2 class="status">Ingresa el link debajo...</h2>
 			<input type="text" class="link-download--js" />
-			<button onclick="download()">Descargar</button>
+
+			<div class="row container center">
+				<button class="six columns" onclick="download('video')">Descargar Video</button>
+				<button class="six columns" onclick="download('mp3')">Descargar MP3</button>
+			</div>
 		</div>
 		<script>
-			const download = () => {
+			const download = (type) => {
 				const data = document.querySelector(".link-download--js").value;
 				const status = document.querySelector(".status");
-				window.location.href = `/download?link=${data}`;
+
+				window.location.href =
+					type === "video" ? `/download?link=${data}&type=mp4` : `/download?link=${data}&type=mp3`;
 			};
 
 			// CODELAB: Register service worker.

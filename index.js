@@ -3,15 +3,15 @@ const SM = require("./ServerManager");
 const app = new SM(process.env.PORT || 5500, false, "/public").StartServer().GetApp();
 
 app.get("/download", async (req, res) => {
-	const { link } = req.query;
+	const { link, type } = req.query;
 	if (ytdl.validateURL(link)) {
 		const {
 			videoDetails: { title },
 		} = await ytdl.getBasicInfo(link);
-		const audio = ytdl(link);
+		const audio = type === "mp4" ? ytdl(link) : ytdl(link, { quality: "highestaudio" });
 		res.writeHead(200, {
 			"Content-Type": "application/octet-stream",
-			"Content-Disposition": `attachment; filename="${title}.mp4"`,
+			"Content-Disposition": `attachment; filename="${title}.${type}"`,
 		});
 		audio.pipe(res);
 	} else {
