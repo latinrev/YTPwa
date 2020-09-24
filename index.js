@@ -11,7 +11,7 @@ app.get("/download", async (req, res) => {
 		const audio = type === "mp4" ? ytdl(link) : ytdl(link, { quality: "highestaudio" });
 		res.writeHead(200, {
 			"Content-Type": "application/octet-stream",
-			"Content-Disposition": `attachment; filename="${title}.${type}"`,
+			"Content-Disposition": `attachment; filename="${title.toString('utf8')}.${type}"`,
 		});
 		audio.pipe(res);
 	} else {
