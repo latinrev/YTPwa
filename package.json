@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "cors": "^2.8.5",
+    "emoji-strip": "^1.0.1",
     "express": "^4.17.1",
     "ytdl-core": "^3.2.1"
   }
