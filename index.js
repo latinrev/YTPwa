@@ -1,21 +1,27 @@
 const ytdl = require("ytdl-core");
-const SM = require("./ServerManager");
-const app = new SM(process.env.PORT || 5500, false, "/public").StartServer().GetApp();
+const Eonil = require("eonil");
+const { app, express } = new Eonil({ port: process.env.PORT || 5500, directory: "./public" })
+	.StartServer()
+	.GetAllInstances();
 const emojiStrip = require("emoji-strip");
+
+app.use(express.json({}));
+
 app.get("/download", async (req, res) => {
 	const { link, type } = req.query;
+	console.log(link, type);
 	if (ytdl.validateURL(link)) {
-		const {
+		let {
 			videoDetails: { title },
 		} = await ytdl.getBasicInfo(link);
+		title = title !== "" ? emojiStrip(title.toString("utf8")).trim() : "Video has no name";
 		const audio = type === "mp4" ? ytdl(link) : ytdl(link, { quality: "highestaudio" });
-		let cleanTitle = title !== "" ? emojiStrip(title.toString("utf8")).trim() : "No name video";
 		res.writeHead(200, {
 			"Content-Type": "application/octet-stream",
-			"Content-Disposition": `attachment; filename="${cleanTitle}.${type}"`,
+			"Content-Disposition": `attachment; filename=${title}.${type}`,
 		});
 		audio.pipe(res);
 	} else {
-		res.sendStatus(400);
+		res.send("Link is not valid");
 	}
 });

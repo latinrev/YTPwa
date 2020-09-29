@@ -24,10 +24,13 @@
 		</div>
 		<script>
 			const download = (type) => {
-				const data = document.querySelector(".link-download--js").value;
+				const youtubeLink = document.querySelector(".link-download--js").value;
 				const status = document.querySelector(".status");
-				window.location.href =
-					type === "video" ? `/download?link=${data}&type=mp4` : `/download?link=${data}&type=mp3`;
+				const downloadLink =
+					type === "video"
+						? `/download?link=${youtubeLink}&type=mp4`
+						: `/download?link=${youtubeLink}&type=mp3`;
+				window.open(downloadLink, "Download", "width=200,height=200");
 			};
 			// CODELAB: Register service worker.
 			if ("serviceWorker" in navigator) {
