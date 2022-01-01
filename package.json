@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "content-disposition": "^0.5.3",
+    "content-disposition": "^0.5.4",
     "eonil": "^1.0.1",
     "ytdl-core": "^3.3.0"
   }
